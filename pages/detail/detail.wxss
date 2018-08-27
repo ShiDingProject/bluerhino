@@ -1,1 +1,288 @@
 /* pages/detail/detail.wxss */
+.clearfix{zoom:1;}
+.clearfix:after{ clear:both; display:block; height:0; content:"."; visibility:hidden;}
+.clear{clear:both;}
+.detail{
+}
+.detail-title{
+  font-family: PingFang-SC-Bold;
+	font-size: 49rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 76rpx;
+	letter-spacing: 5rpx;
+	color: #333333;
+  width: 90%;
+  padding: 0 5%;
+}
+.detail-text{
+  margin: 40rpx 0rpx;
+  width: 90%;
+  padding: 0 5%;
+}
+.detail-sign{
+  height: 60rpx;
+	border-radius: 10rpx;
+	border: solid 2rpx #f1a43a;
+  font-family: PingFang-SC-Medium;
+	font-size: 28rpx;
+	line-height: 56rpx;
+	letter-spacing: 1rpx;
+	color: #f2a43a;
+  padding:0rpx 18rpx 0rpx 60rpx;
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  margin-bottom: 50rpx;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+.detail-sign image{
+  display: block;
+  position: absolute;
+  left: 20rpx;
+  top: 18rpx;
+  width: 28rpx;
+  height: 22rpx;
+}
+.detail-comment{
+  width: 90%;
+  border-top:1px solid #f2f5f8;
+  padding:8rpx 5%;
+}
+.detail-comment-box{
+  padding-left: 100rpx;
+  position: relative;
+  min-height:100rpx;
+  margin: 28rpx 0rpx;
+}
+.detail-comment-box .box1{
+  width: 70rpx;
+  height: 70rpx;
+  position: absolute;
+  left: 6rpx;
+  top: 12rpx;
+  border-radius: 70rpx;
+  overflow: hidden
+}
+.detail-comment-box .box1 image{
+  width: 70rpx;
+  height: 70rpx;
+}
+.detail-comment-box .box2{
+  position: relative;
+}
+.detail-comment .box2 .name{
+  font-family: PingFang-SC-Medium;
+	font-size: 28rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 56rpx;
+	letter-spacing: 0rpx;
+	color: #486495;
+  padding-right: 158rpx;
+}
+.detail-comment-box .box2 .content{
+  font-family: PingFang-SC-Medium;
+	font-size: 30rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 46rpx;
+	letter-spacing: 0rpx;
+	color: #222222;
+}
+.detail-comment-box .box2 .date{
+  font-family: PingFang-SC-Medium;
+	font-size: 24rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 56rpx;
+	letter-spacing: 0rpx;
+	color: #222222;
+}
+.detail-comment-box .box2 .agree{
+  position: absolute;
+  right: 0rpx;
+  top: 0rpx;
+  font-family: PingFang-SC-Medium;
+	font-size: 26rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 56rpx;
+	letter-spacing: 0rpx;
+	color: #989fab;
+}
+.detail-comment-box .box2 .agree image{
+  display: inline-block;
+  width: 30rpx;
+  height: 30rpx;
+  vertical-align: middle;
+  margin-right: 10rpx;
+  margin-bottom: 10rpx;
+}
+.detail-comment-box .box2 .agree .isnotActive{
+  display: inline-block;
+}
+.detail-comment-box .box2 .agree .isActive{
+  display: none;
+}
+.detail-comment-box .box2 .active{
+  color: #f2a43a;
+}
+.detail-comment-box .box2 .active .isnotActive{
+  display: none;
+}
+.detail-comment-box .box2 .active .isActive{
+  display: inline-block;
+}
+.detail-comment-listShow{
+  font-family: PingFang-SC-Bold;
+	font-size: 28rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 48rpx;
+  height: 48rpx;
+	letter-spacing: 0rpx;
+	color: #8790a4;
+  text-align: center;
+  margin-bottom: 120rpx;
+}
+.detail-fixed{
+  position: fixed;
+  left: 0rpx;
+  bottom:0rpx;
+  height: 100rpx;
+  width: 90%;
+  background: #fff;
+  border-top:1px solid #f2f5f8;
+  padding: 0rpx 5%;
+  z-index: 1;
+}
+.detail-fixed .agree{
+  position: relative;
+  float: left;
+  height: 70rpx;
+  background-color: #f2f5f8;
+	border-radius: 8rpx;
+  margin-top: 15rpx;
+  font-family: PingFang-SC-Medium;
+	font-size: 28rpx;
+	line-height: 70rpx;
+	color: #000000;
+  padding-left: 90rpx;
+  padding-right: 36rpx;
+}
+.detail-fixed .agree image{
+  display: block;
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  left:35rpx;
+  top:13rpx;
+}
+.detail-fixed .agree .isnotActive{
+  display: block;
+}
+.detail-fixed .agree .isActive{
+  display: none;
+}
+.detail-fixed .active{
+  color: #f2a43a;
+}
+.detail-fixed .active .isnotActive{
+  display: none;
+}
+.detail-fixed .active .isActive{
+  display: block;
+}
+.detail-fixed .comment{
+  position: relative;
+  float: right;
+  height:30rpx;
+  line-height: 26rpx;
+  padding-top: 66rpx;
+  font-family: PingFang-SC-Medium;
+	font-size: 22rpx;
+	color: #000000;
+  margin-left: 70rpx;
+}
+.detail-fixed .comment image{
+  display: block;
+  width: 41rpx;
+  height: 38rpx;
+  position: absolute;
+  left:0rpx;
+  top:20rpx;
+}
+.detail-fixed .share{
+  position: relative;
+  float: right;
+  height:30rpx;
+  line-height: 26rpx;
+  padding-top: 66rpx;
+  font-family: PingFang-SC-Medium;
+	font-size: 22rpx;
+	color: #000000;
+  margin-left: 70rpx;
+}
+.detail-fixed .share image{
+  display: block;
+  width: 34rpx;
+  height: 42rpx;
+  position: absolute;
+  left:0rpx;
+  top:13rpx;
+}
+.detail-comment-list-bg{
+  width: 100%;
+  height: 0px;
+  z-index: 10;
+  background: #000;
+  position: fixed;
+  bottom: 0rpx;
+  left: 0rpx;
+  opacity: 0;
+}
+.detail-comment-list-bgActive{
+  opacity: 0.8;
+  height: 100%;
+  transition:opacity .5s ease,height .1s ease;
+}
+.detail-comment-list-bgNoActive{
+  opacity:0;
+  height: 0rpx;
+  transition:opacity .5s ease,height .1s ease .5s;
+}
+.detail-comment-list{
+  height: 95%;
+  background: #fff;
+  z-index: 20;
+  position: fixed;
+  bottom: 0rpx;
+  left: 0rpx;
+  border-top-left-radius:20rpx;
+  border-top-right-radius:20rpx;
+}
+.detail-comment-list_title{
+  position: relative;
+  height: 100rpx;
+  border-bottom: 1px solid #f2f5f8;
+}
+.detail-comment-list_titleName{
+  font-family: PingFang-SC-Bold;
+	font-size: 34rpx;
+	line-height: 100rpx;
+	color: #000000;
+  text-align: center;
+}
+.detail-comment-list_close{
+  position: absolute;
+  left: 5%;
+  top:32rpx;
+  display: block;
+  width: 32rpx;
+  height: 32rpx;
+}
+.detail-commentScroll{
+  height: 95%;
+}

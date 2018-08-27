@@ -1,2 +1,64 @@
 <!--pages/detail/detail.wxml-->
-<text>pages/detail/detail.wxml</text>
+<view class='detail'>
+  <view class='detail-title'>{{ detail_title }}</view>
+  <view class='detail-text'>
+    <rich-text>{{ detail_text }}</rich-text>
+  </view>
+  <view class='detail-sign'>{{ detail_sign }}<image src='../../img/label@2x.png'></image></view>
+  <view class='detail-comment'>
+    <block wx:for="{{ detail_comment.list }}" wx:key="item.id">
+      <view class='detail-comment-box'>
+        <view class='box1'><image src='{{ item.photo }}'></image></view>
+        <view class='box2'>
+          <view class='name'>{{ item.name }}</view>
+          <view class='content'>{{ item.content }}</view>
+          <view class='date'>{{ item.date }}</view>
+          <view class="agree {{ item.user_agree == 1 ? 'active' : '' }}" id='{{ index }}' bindtap="detail_comment_agree">
+            <image class='isnotActive' src="../../img/article_fabulous@2x.png"></image>
+            <image class='isActive' src="../../img/article_fabulous_fill@2x.png"></image>
+            {{ item.agree }}
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  
+  <view class='detail-comment-listShow' bindtap="show_detail_comment_listAll">查看全部（{{ detail_comment.total }}）</view>
+  <!-- 部分 评论列表 -->
+  <view class='detail-fixed clearfix'>
+    <view class="agree {{ user_agree == 1 ? 'active' : '' }}" bindtap="detail_agree">
+      <image class='isnotActive' src="../../img/article_fabulous@2x.png"></image>
+      <image class='isActive' src="../../img/icon_article_share@2x.png"></image>
+      {{ detail_agree }}点赞
+    </view>
+    <view class='share'><image src="../../img/article_share@2x.png"></image>分享</view>
+    <view class='comment'><image src="../../img/article_comment@2x.png"></image>评论</view>
+  </view>
+  <!-- 所有 评论列表（默认隐藏） -->
+  <view class="detail-comment-list-bg {{ detail_comment_listBgStatus == 1 ? 'detail-comment-list-bgActive' : 'detail-comment-list-bgNoActive' }}"></view>
+  <view class='detail-comment-list' wx:if="{{ detail_comment_listStatus }}" animation='{{animationData}}'>
+    <view class='detail-comment-list_title'>
+      <view class='detail-comment-list_titleName'>全部{{detail_comment_listAll.total}}条评论信息</view>
+      <image class='detail-comment-list_close' src='../../img/comment_close@2x.png' bindtap="hide_detail_comment_listAll"></image>
+    </view>
+    <scroll-view class='detail-commentScroll' scroll-y>
+      <view class='detail-comment mb60'>
+        <block wx:for="{{ detail_comment_listAll.list }}" wx:key="item.id">
+          <view class='detail-comment-box'>
+            <view class='box1'><image src='{{ item.photo }}'></image></view>
+            <view class='box2'>
+              <view class='name'>{{ item.name }}</view>
+              <view class='content'>{{ item.content }}</view>
+              <view class='date'>{{ item.date }}</view>
+              <view class="agree {{ item.user_agree == 1 ? 'active' : '' }}" id='{{ index }}' bindtap="detail_comment_listAll_agree">
+                <image class='isnotActive' src="../../img/article_fabulous@2x.png"></image>
+                <image class='isActive' src="../../img/article_fabulous_fill@2x.png"></image>
+                {{ item.agree }}
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+  </view>
+</view>
