@@ -10,32 +10,20 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     navData: [
       {
-        text: '首页'
+        text: '推荐'
       },
       {
-        text: '健康'
+        text: '资讯'
       },
       {
-        text: '情感'
+        text: '观点'
       },
       {
-        text: '职场'
+        text: '著作'
       },
       {
-        text: '育儿'
+        text: '解决方案'
       },
-      {
-        text: '纠纷'
-      },
-      {
-        text: '青葱'
-      },
-      {
-        text: '上课'
-      },
-      {
-        text: '下课'
-      }
     ],
     currentTab: 0,
     navScrollLeft: 0
