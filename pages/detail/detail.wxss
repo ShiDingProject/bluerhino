@@ -1,8 +1,14 @@
 /* pages/detail/detail.wxss */
-.clearfix{zoom:1;}
-.clearfix:after{ clear:both; display:block; height:0; content:"."; visibility:hidden;}
-.clear{clear:both;}
+@import"../../wxParse/wxParse.wxss";/*转译 富文本插件*/
+
 .detail{
+  height:100%;
+  position: relative;
+}
+.detailScroll-box{
+  min-height:102%;
+  box-sizing: border-box;
+  padding-bottom:112rpx;
 }
 .detail-title{
   font-family: PingFang-SC-Bold;
@@ -15,12 +21,44 @@
   width: 90%;
   padding: 0 5%;
 }
+.detail_author_date{
+  width: 90%;
+  padding: 18rpx 5%;
+  position: relative;
+  min-height: 40rpx;
+}
+.detail_author_date .author{
+  font-family: PingFang-SC-Medium;
+	font-size: 28rpx;
+	line-height: 40rpx;
+	color: #333333;
+  padding-right: 200rpx
+}
+.detail_author_date .date{
+  background: #fff;
+  width: 180rpx;
+  position: absolute;
+  right: 5%;
+  top: 18rpx;
+  font-family: PingFang-SC-Medium;
+	font-size: 26rpx;
+	line-height: 40rpx;
+	color: #999999;
+  text-align: center;
+}
 .detail-text{
-  margin: 40rpx 0rpx;
+  margin: 15rpx 0rpx 40rpx;
   width: 90%;
   padding: 0 5%;
 }
+.detail-text image{
+  max-width: 100%;
+}
 .detail-sign{
+  width: 90%;
+  padding: 0 5%;
+}
+.detail-sign .sign{
   height: 60rpx;
 	border-radius: 10rpx;
 	border: solid 2rpx #f1a43a;
@@ -33,9 +71,8 @@
   display: inline-block;
   position: relative;
   box-sizing: border-box;
-  margin-bottom: 50rpx;
-  margin-left: 5%;
-  margin-right: 5%;
+  margin-bottom: 10rpx;
+  margin-right: 20rpx;
 }
 .detail-sign image{
   display: block;
@@ -135,6 +172,40 @@
 .detail-comment-box .box2 .active .isActive{
   display: inline-block;
 }
+.detail-comment-boxer{
+  position: relative;
+  margin: 10rpx 0rpx 16rpx;
+  background: #f1f1f1;
+  padding: 0rpx 30rpx;
+  border-radius: 8rpx;
+}
+.detail-comment-boxer .title_name{
+  position: relative;
+  padding:20rpx 0rpx;
+  padding-left: 100rpx;
+}
+.detail-comment-boxer .title{
+  position: absolute;
+  left: 0rpx;
+  top: 20rpx;
+  color: #a7a7a9;
+  font-family: PingFang-SC-Medium;
+	font-size: 28rpx;
+	line-height: 40rpx;
+}
+.detail-comment-boxer .name{
+  font-family: PingFang-SC-Medium;
+	font-size: 28rpx;
+  color: #589fd7;
+  line-height: 40rpx;
+}
+.detail-comment-boxer .content{
+  font-family: PingFang-SC-Medium;
+	font-size: 28rpx;
+  color: #909092;
+  line-height: 40rpx;
+  margin-bottom: 20rpx;
+}
 .detail-comment-listShow{
   font-family: PingFang-SC-Bold;
 	font-size: 28rpx;
@@ -153,10 +224,12 @@
   bottom:0rpx;
   height: 100rpx;
   width: 90%;
-  background: #fff;
+  background: #FFF;
   border-top:1px solid #f2f5f8;
   padding: 0rpx 5%;
-  z-index: 1;
+  z-index: 100;
+  overflow: hidden;
+  z-index: 10001;
 }
 .detail-fixed .agree{
   position: relative;
@@ -212,27 +285,28 @@
   height: 38rpx;
   position: absolute;
   left:0rpx;
+  right: 0rpx;
   top:20rpx;
+  margin: 0rpx auto;
 }
 .detail-fixed .share{
   position: relative;
   float: right;
-  height:30rpx;
-  line-height: 26rpx;
-  padding-top: 66rpx;
+  width: 140rpx;
+  height:96rpx;
+  line-height: 96rpx;
+  text-align: right;
+  /* padding-top: 66rpx; */
   font-family: PingFang-SC-Medium;
 	font-size: 22rpx;
 	color: #000000;
   margin-left: 70rpx;
-}
-.detail-fixed .share image{
   display: block;
-  width: 34rpx;
-  height: 42rpx;
-  position: absolute;
-  left:0rpx;
-  top:13rpx;
+  border: 1rpx solid #fff;
+  background:#fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAqCAYAAADWFImvAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQyIDc5LjE2MDkyNCwgMjAxNy8wNy8xMy0wMTowNjozOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTggKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkI1N0VERDMzQTVCNTExRThCRDI4QTMwMjg1MTRCREQyIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkI1N0VERDM0QTVCNTExRThCRDI4QTMwMjg1MTRCREQyIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QjU3RUREMzFBNUI1MTFFOEJEMjhBMzAyODUxNEJERDIiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QjU3RUREMzJBNUI1MTFFOEJEMjhBMzAyODUxNEJERDIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4Xl56aAAACKElEQVR42uyYTUhUURTH38woJjNujIEh0k20SJCwFkpLIfAjKGqgRYpEGyNwZTujjZtQCSFqp4vBFiPBQEEQriqxtH0UalOQ+K3QMOrQMP4OnrcJnZnXe80b8l34cWa45577f+d+vXcDhs1yJhIerg0FG7ZS6Q+GWwURdyEHWbhhJ5bPhogOzEuNIezA5YXltemSCUFEE+YthFSAxDkBG3AJMV+txvT/hYjTmFcqYhAysAfP4CS8xif8TzNCBzWYd3AenkMXbGm1iEjAFfgIrWQm7XhGEBHAxFXEe7hNRzmznt9ZzE34BM0woW0cH5on0AYy/lfpOPOng2agE77BNRh1VAhPdh/TC+vQQYebR/lSt4ppB/G5R9t+R4QQKIp5BLvylHS0UKgNPl8kazqJhzSG7Yw81UndY2WPwFfmUbf+HSjkX1FEzAeQInDc6pKkzSTZkGHaLsU2vy3YjeM3yqSUjZAK0hrDNhbhG2PMRywM2TnMGFQfUv0bvmvMhDlZu4qMPW/xIeugJU/9RbiO4HHsHXPVfJaNKk8j2cp/Wlwxb+gkckRGDD0GHstRATOmkAwNk06POzFX8lQnEbqInYU+VycrQucwIqahHFbNL1m93j7iCfGEeEI8If/vi5EDMaYg67oQTtCoN0eOhZCqchDyA87y/njKbSFy8yMXKi8QU++WEB+dB42Di7kL+tmwpB9ApSoyEpU+/SqTu7GHcAsibrzQ7wswAHtXoFxx4jjqAAAAAElFTkSuQmCC) no-repeat 15rpx 22rpx;
+  background-size: 34rpx 42rpx;
 }
+.detail-fixed .share::after{ border: none; }
 .detail-comment-list-bg{
   width: 100%;
   height: 0px;
@@ -285,4 +359,14 @@
 }
 .detail-commentScroll{
   height: 95%;
+}
+.list_Loading{
+  font-family: PingFang-SC-Medium;
+	font-size: 28rpx;
+	color: #9e9e9e;
+  text-align: center;
+  width: 90%;
+  padding: 0rpx 5%;
+  line-height: 32rpx;
+  margin-bottom: 32rpx;
 }

@@ -1,33 +1,7 @@
 <!--pages/search/search.wxml-->
 <view class='search'>
-  <view class='search-form clearfix'>
-    <view class='search-input'>
-      <image class='img' src='../../img/search@2x.png'></image>
-      <input class="input" auto-focus confirm-type="search" bindconfirm="go_SearchList" placeholder="搜索您感兴趣的信息" bindinput="bindKeyInput" bindfocus="bindKeyInput" value='{{ search_value }}' />
-    </view>
-    <view class='search-giveup' bindtap="go_Index">取消</view>
-  </view>
-  <!-- 搜索页面 首页 -->
-  <scroll-view class='search-index' wx:if="{{page == 0}}" scroll-y style="height: 100%" >
-    <view class='search-tag'>
-      <!-- <view class='title'>标签</view> -->
-      <view class='btn-box clearfix'>
-        <view wx:for="{{ searchHotwordList }}" wx:for-item="searchHotwordItem" wx:for-index="searchHotwordIndex" wx:key="searchHotwordIndex" class='btn' bindtap="btn_SearchList" data-name='{{ searchHotwordItem }}'>{{ searchHotwordItem }}</view>
-      </view>
-    </view>
-    <view class='search-history' wx:if="{{ searchHistoryList.length>0 }}">
-        <view class='title'>历史记录</view>
-        <view class='list' wx:for="{{ searchHistoryList }}" wx:for-item="searchHistoryItem" wx:for-index="searchHistoryIndex" wx:key="searchHistoryIndex">
-          <view class='list-tap' bindtap="btn_SearchList" data-name='{{ searchHistoryItem }}'><image src='../../img/history@2x.png'></image>{{ searchHistoryItem }}</view>
-          <view class='list-del' data-index="{{ searchHistoryIndex }}" bindtap="removeSearchHistory"><image src='../../img/comment_close@2x.png'></image></view>
-        </view>
-        <view class='del-listAll' data-index="all" bindtap="removeSearchHistory">清空历史记录</view>
-    </view>
-  </scroll-view>
-  <!-- 搜索页面 输入框有内容 —— 即将搜索 -->
-  <view class='search-before' wx:if="{{page == 1}}" scroll-y bindtap="go_SearchList">查看 [ {{search_value}} ] 的搜索结果</view>
   <!-- 搜索页面 搜索 文章列表 -->
-  <scroll-view class='search-detailList' wx:if="{{page == 2}}" scroll-y bindscrolltolower="detail_Pull_Up_Loading" style="height: 100%" >
+  <scroll-view class='search-detailList' scroll-y bindscrolltolower="detail_Pull_Up_Loading" style="height: 100%" >
 
      <block wx:for="{{ detailList.data }}" wx:for-item="detailItem" wx:for-index="detailIndex" wx:key="detailIndex">
 

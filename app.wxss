@@ -11,6 +11,9 @@
 .mb60{
   margin-bottom: 60rpx;
 } 
+.clearfix{zoom:1;}
+.clearfix:after{ clear:both; display:block; height:0; content:"."; visibility:hidden;}
+.clear{clear:both;}
 page{
   width: 100%;
   height: 100%;

@@ -34,6 +34,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    https: 'https://azurhino.com'//【全局变量】之 接口前缀
   }
 })

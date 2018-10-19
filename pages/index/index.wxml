@@ -2,14 +2,217 @@
 <!-- tab导航栏 -->
 <!-- scroll-left属性可以控制滚动条位置 -->
 <!-- scroll-with-animation滚动添加动画过渡 -->
-<scroll-view scroll-x="true" class="nav" scroll-left="{{navScrollLeft}}" scroll-with-animation="{{true}}">
-    <block wx:for="{{navData}}" wx:for-index="idx" wx:for-item="navItem" wx:key="idx">
-        <view class="nav-item {{currentTab == idx ?'active':''}}"  data-current="{{idx}}" bindtap="switchNav">{{navItem.text}}</view>
-    </block>        
-</scroll-view>
-<!-- 页面内容 -->
-<swiper class="tab-box" current="{{currentTab}}" duration="300" bindchange="switchTab">        
-    <swiper-item wx:for="{{navData.length}}" wx:for-item="tabItem" wx:for-index="idx" wx:key="idx" class="tab-content">
-      {{tabItem}}
-    </swiper-item>
-</swiper>
+<view class='view_box'>
+  <view class="nav">
+      <block wx:for="{{navData}}" wx:for-index="idx" wx:for-item="navItem" wx:key="idx">
+          <view class="nav-item {{currentTab == idx ?'active':''}}"  data-current="{{idx}}" bindtap="switchNav">
+            <view class='nav-border'>{{navItem.text}}<view class='border'>123</view></view>
+          </view>
+      </block>
+  </view>
+   <view class='list-search' bindtap="go_SearchPage"><image src='../../img/search@2x.png'></image>搜索您感兴趣的信息</view>
+  <!-- 页面内容 -->
+  <swiper class="tab-box" current="{{currentTab}}" duration="300" bindchange="switchTab">       
+      <swiper-item wx:for="{{navData}}" wx:for-item="tabItem" wx:for-index="idx" wx:key="idx" class="tab-content">
+
+
+        <!-- 推荐 页面 -->
+        <scroll-view scroll-y scroll-top='{{recommendTopNum}}' bindscrolltolower="recommend_Pull_Up_Loading" style="height: 100%" wx:if="{{ tabItem.page_type == 'recommend' }}">
+          <view class='full_Height'>
+            <block wx:for="{{ recommendList.data }}" wx:for-item="recommendItem" wx:for-index="recommendIndex" wx:key="recommendIndex">
+
+
+              <!-- ********** 测试类型1,3张图片；上文字下图片 ********** -->
+              <view bindtap="bookTap" data-aid="{{recommendItem.id}}" data-systemcategory='{{ recommendItem.systemcategory }}' wx:if="{{ recommendItem.view_type == 3 }}" class='list-type0'>
+                <view class='title'>{{ recommendItem.post_title }}</view>
+                <view class='image clearfix'>
+                  <!-- 上传 图片大小比例 220*150 -->
+                  <image wx:for="{{ recommendItem.photos }}" wx:for-item="recommendImgItem" wx:for-index="recommendImgIndex" wx:key="recommendImgIndex" src="{{ recommendImgItem }}"></image>
+                </view>
+                <view class='date-agree clearfix'>
+                  <view class='date'>{{recommendItem.create_time}}</view>
+                  <view class='agree'><image src='../../img/give@2x.png'></image>{{ recommendItem.post_expertslike }} 位专家已点赞</view>
+                </view>
+              </view>
+
+
+              <!-- ********** 测试类型2,1张图片；上文字下图片 ********** -->
+              <view bindtap="bookTap" data-aid="{{recommendItem.id}}" data-systemcategory='{{ recommendItem.systemcategory }}' wx:if="{{ recommendItem.view_type == 2 }}" class='list-type1'>
+                <view class='title'>{{ recommendItem.post_title }}</view>
+                <view class='image clearfix'>
+                  <!-- 上传 图片大小比例 670*300 -->
+                  <image wx:for="{{ recommendItem.photos }}" wx:for-item="recommendImgItem" wx:for-index="recommendImgIndex" wx:key="recommendImgIndex" src="{{ recommendImgItem }}"></image>
+                </view>
+                <view class='date-agree clearfix'>
+                  <view class='date'>{{recommendItem.create_time}}</view>
+                  <view class='agree'><image src='../../img/give@2x.png'></image>{{ recommendItem.post_expertslike }} 位专家已点赞</view>
+                </view>
+              </view>
+
+
+              <!-- ********** 测试类型3,1张图片；右文字左图片 ********** -->
+              <view bindtap="bookTap" data-aid="{{recommendItem.id}}" data-systemcategory='{{ recommendItem.systemcategory }}' wx:if="{{ recommendItem.view_type == 1 }}" class='list-type2'>
+                <view class='title'>{{ recommendItem.post_title }}</view>
+                <view class='image clearfix'>
+                  <!-- 上传 图片大小比例 670*300 -->
+                  <image wx:for="{{ recommendItem.photos }}" wx:for-item="recommendImgItem" wx:for-index="recommendImgIndex" wx:key="recommendImgIndex" src="{{ recommendImgItem }}"></image>
+                </view>
+                <view class='date-agree clearfix'>
+                  <view class='date'>{{recommendItem.create_time}}</view>
+                  <view class='agree'><image src='../../img/give@2x.png'></image>{{ recommendItem.post_expertslike }} 位专家已点赞</view>
+                </view>
+              </view>
+
+
+              <!-- ********** 测试类型4.1张图片；无图片 ********** -->
+              <view bindtap="bookTap" data-aid="{{recommendItem.id}}" data-systemcategory='{{ recommendItem.systemcategory }}' wx:if="{{ recommendItem.view_type == 0 }}" class='list-type3'>
+                <view class='title'>{{ recommendItem.post_title }}</view>
+                <view class='date-agree clearfix'>
+                  <view class='date'>{{recommendItem.create_time}}</view>
+                  <view class='agree'><image src='../../img/give@2x.png'></image>{{ recommendItem.post_expertslike }} 位专家已点赞</view>
+                </view>
+              </view>
+
+            </block>
+          </view>
+          <view wx:if="{{ recommendList.data.length < recommendList.total}}" class='list_Loading'>加载中...</view>
+        </scroll-view>
+
+
+        <!-- 资讯 页面 -->
+        <scroll-view scroll-y scroll-top='{{informationTopNum}}' bindscrolltolower="information_Pull_Up_Loading" style="height: 100%" wx:if="{{ tabItem.page_type == 'information' }}" class='information'>
+          <view class='full_Height'>
+            <block wx:for="{{ informationList.data }}" wx:for-item="informationItem" wx:for-index="informationIndex" wx:key="informationIndex">
+
+              <!-- ********** 测试类型1,3张图片；上文字下图片 ********** -->
+              <view bindtap="bookTap" data-aid="{{informationItem.id}}" data-systemcategory='{{ informationItem.systemcategory }}' wx:if="{{ informationItem.view_type == 3 }}" class='list-type0'>
+                <view class='title'>{{ informationItem.post_title }}</view>
+                <view class='image clearfix'>
+                  <!-- 上传 图片大小比例 220*150 -->
+                  <image wx:for="{{ informationItem.photos }}" wx:for-item="informationImgItem" wx:for-index="informationImgIndex" wx:key="informationImgIndex" src="{{ informationImgItem }}"></image>
+                </view>
+                <view class='date-agree clearfix'>
+                  <view class='date'>{{informationItem.create_time}}</view>
+                  <view class='agree'><image src='../../img/give@2x.png'></image>{{ informationItem.post_expertslike }} 位专家已点赞</view>
+                </view>
+              </view>
+
+
+              <!-- ********** 测试类型2,1张图片；上文字下图片 ********** -->
+              <view bindtap="bookTap" data-aid="{{informationItem.id}}" data-systemcategory='{{ informationItem.systemcategory }}' wx:if="{{ informationItem.view_type == 2 }}" class='list-type1'>
+                <view class='title'>{{ informationItem.post_title }}</view>
+                <view class='image clearfix'>
+                  <!-- 上传 图片大小比例 670*300 -->
+                  <image wx:for="{{ informationItem.photos }}" wx:for-item="informationImgItem" wx:for-index="informationImgIndex" wx:key="informationImgIndex" src="{{ informationImgItem }}"></image>
+                </view>
+                <view class='date-agree clearfix'>
+                  <view class='date'>{{informationItem.create_time}}</view>
+                  <view class='agree'><image src='../../img/give@2x.png'></image>{{ informationItem.post_expertslike }} 位专家已点赞</view>
+                </view>
+              </view>
+
+
+              <!-- ********** 测试类型3,1张图片；右文字左图片 ********** -->
+              <view bindtap="bookTap" data-aid="{{informationItem.id}}" data-systemcategory='{{ informationItem.systemcategory }}' wx:if="{{ informationItem.view_type == 1 }}" class='list-type2'>
+                <view class='title'>{{ informationItem.post_title }}</view>
+                <view class='image clearfix'>
+                  <!-- 上传 图片大小比例 670*300 -->
+                  <image wx:for="{{ informationItem.photos }}" wx:for-item="informationImgItem" wx:for-index="informationImgIndex" wx:key="informationImgIndex" src="{{ informationImgItem }}"></image>
+                </view>
+                <view class='date-agree clearfix'>
+                  <view class='date'>{{informationItem.create_time}}</view>
+                  <view class='agree'><image src='../../img/give@2x.png'></image>{{ informationItem.post_expertslike }} 位专家已点赞</view>
+                </view>
+              </view>
+
+
+              <!-- ********** 测试类型4.1张图片；无图片 ********** -->
+              <view bindtap="bookTap" data-aid="{{informationItem.id}}" data-systemcategory='{{ informationItem.systemcategory }}' wx:if="{{ informationItem.view_type == 0 }}" class='list-type3'>
+                <view class='title'>{{ informationItem.post_title }}</view>
+                <view class='date-agree clearfix'>
+                  <view class='date'>{{informationItem.create_time}}</view>
+                  <view class='agree'><image src='../../img/give@2x.png'></image>{{ informationItem.post_expertslike }} 位专家已点赞</view>
+                </view>
+              </view>
+
+            </block>
+          </view>
+          <view wx:if="{{ informationList.data.length < informationList.total}}" class='list_Loading'>加载中...</view>
+        </scroll-view>
+
+
+        <!-- 观点 页面 -->
+        <scroll-view scroll-y scroll-top='{{viewTopNum}}' bindscrolltolower="view_Pull_Up_Loading" style="height: 100%" wx:if="{{ tabItem.page_type == 'view' }}" class='view'>
+          <view class='full_Height'>
+            <block wx:for="{{ viewList.data }}" wx:for-item="viewItem" wx:for-index="viewIndex" wx:key="viewIndex">
+
+              <!-- ********** 测试类型3,1张图片；右文字左图片 ********** -->
+              <view bindtap="bookTap" data-aid="{{viewItem.id}}" data-systemcategory='{{ viewItem.systemcategory }}' wx:if="{{ viewItem.view_type == 1 }}" class='list-type2'>
+                <view class='title'>{{ viewItem.post_title }}</view>
+                <view class='image clearfix'>
+                  <!-- 上传 图片大小比例 670*300 -->
+                  <image  src="{{ viewItem.photos }}"></image>
+                </view>
+                <view class='date-agree clearfix'>
+                  <view class='date'>{{viewItem.create_time}}</view>
+                  <view class='agree'><image src='../../img/give@2x.png'></image>{{ viewItem.post_expertslike }} 位专家已点赞</view>
+                </view>
+              </view>
+
+            </block>
+          </view>
+          <view wx:if="{{ viewList.data.length < viewList.total}}" class='list_Loading'>加载中...</view>
+        </scroll-view>
+
+
+        <!-- 著作 页面 -->
+        <scroll-view scroll-y scroll-top='{{bookTopNum}}' bindscrolltolower="book_Pull_Up_Loading" style="height: 100%" wx:if="{{ tabItem.page_type == 'book' }}" class='book'>
+          <view class='full_Height'>
+            <block wx:for="{{ bookList.data }}" wx:for-item="bookItem" wx:for-index="bookIndex" wx:key="bookIndex">
+
+              <!-- ********** 测试类型3,1张图片；右文字左图片 ********** -->
+              <view bindtap="bookTap" data-aid="{{bookItem.id}}" data-systemcategory='{{ bookItem.systemcategory }}' wx:if="{{ bookItem.view_type == 1 }}" class='list-type2'>
+                <view class='title'>{{ bookItem.post_title }}</view>
+                <view class='image clearfix'>
+                  <!-- 上传 图片大小比例 670*300 -->
+                  <image  src="{{ bookItem.photos }}"></image>
+                </view>
+                <view class='date-agree clearfix'>
+                  <view class='date'>{{bookItem.create_time}}</view>
+                  <view class='agree'><image src='../../img/give@2x.png'></image>{{ bookItem.post_expertslike }} 位专家已点赞</view>
+                </view>
+              </view>
+
+            </block>
+          </view>
+          <view wx:if="{{ bookList.data.length < bookList.total}}" class='list_Loading'>加载中...</view>
+        </scroll-view>
+
+
+        <!-- 解决方案 页面 -->
+        <scroll-view scroll-y scroll-top='{{solutionTopNum}}' bindscrolltolower="solution_Pull_Up_Loading" style="height: 100%" wx:if="{{ tabItem.page_type == 'solution' }}" class='solution'>
+          <view class='full_Height'>
+            <block wx:for="{{ solutionList.data }}" wx:for-item="solutionItem" wx:for-index="solutionIndex" wx:key="solutionIndex">
+
+              <!-- ********** 测试类型3,1张图片；右文字左图片 ********** -->
+              <view bindtap="bookTap" data-aid="{{solutionItem.id}}" data-systemcategory='{{ solutionItem.systemcategory }}' wx:if="{{ solutionItem.view_type == 1 }}" class='list-type2'>
+                <view class='title'>{{ solutionItem.post_title }}</view>
+                <view class='image clearfix'>
+                  <!-- 上传 图片大小比例 670*300 -->
+                  <image src="{{ solutionItem.photos }}"></image>
+                </view>
+                <view class='date-agree clearfix'>
+                  <view class='date'>{{solutionItem.create_time}}</view>
+                  <view class='agree'><image src='../../img/give@2x.png'></image>{{ solutionItem.post_expertslike }} 位专家已点赞</view>
+                </view>
+              </view>
+
+            </block>
+          </view>
+          <view wx:if="{{ solutionList.data.length < solutionList.total}}" class='list_Loading'>加载中...</view>
+        </scroll-view>
+
+
+      </swiper-item>
+  </swiper>
+</view>
