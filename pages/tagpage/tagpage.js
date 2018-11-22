@@ -29,7 +29,7 @@ Page({
     console.log(that.data.systemcategory);
     console.log(that.data.tags);
     wx.request({
-      url: app.globalData.https + '/public/mp/synchronize/synchronizeArtile',
+      url: app.globalData.https + '/mp/synchronize/synchronizeArtile',
       data: {
         page: that.data.detailPage,
         limit: that.data.pageLimit,
@@ -58,7 +58,7 @@ Page({
       var page = that.data.detailPage + 1;
       that.setData({ detailPage: page });
       wx.request({
-        url: app.globalData.https + '/public/mp/synchronize/synchronizeArtile',
+        url: app.globalData.https + '/mp/synchronize/synchronizeArtile',
         data: {
           page: that.data.detailPage,
           limit: that.data.pageLimit,

@@ -35,6 +35,6 @@ App({
   },
   globalData: {
     userInfo: null,
-    https: 'https://azurhino.com'//【全局变量】之 接口前缀
+    https: 'https://www.azurhino.com'//【全局变量】之 接口前缀
   }
 })

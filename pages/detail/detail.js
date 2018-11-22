@@ -30,7 +30,7 @@ Page({
   getDetail_Info:function(){
     var that = this;
     wx.request({
-      url: app.globalData.https + '/public/mp/synchronize/get_comment', 
+      url: app.globalData.https + '/mp/synchronize/get_comment', 
       data: {
         page: that.data.commentPage,
         limit: that.data.pageLimit,
@@ -63,7 +63,7 @@ Page({
       var page = that.data.commentPage + 1;
       that.setData({ commentPage: page });
       wx.request({
-        url: app.globalData.https + '/public/mp/synchronize/get_comment',
+        url: app.globalData.https + '/mp/synchronize/get_comment',
         data: {
           page: that.data.commentPage,
           limit: that.data.pageLimit,

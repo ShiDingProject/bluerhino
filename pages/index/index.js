@@ -155,7 +155,7 @@ Page({
   getRecommendList: function () {
     var that = this;
     wx.request({
-      url: app.globalData.https + '/public/mp/synchronize/synchronizeArtile',
+      url: app.globalData.https + '/mp/synchronize/synchronizeArtile',
       data: {
         page: that.data.recommendPage,
         limit: that.data.pageLimit,
@@ -163,7 +163,7 @@ Page({
       },
       method: "POST",
       success: function (res) {
-        // console.log(res.data);
+        // console.log('getRecommendList',res.data);
         var data = res.data;
         that.setData({ recommendList: data });
       }
@@ -177,7 +177,7 @@ Page({
       var page = that.data.recommendPage + 1;
       that.setData({ recommendPage: page });
       wx.request({
-        url: app.globalData.https + '/public/mp/synchronize/synchronizeArtile',
+        url: app.globalData.https + '/mp/synchronize/synchronizeArtile',
         data: {
           page: that.data.recommendPage,
           limit: that.data.pageLimit,
@@ -201,7 +201,7 @@ Page({
   getInformationList: function () { 
     var that = this;
     wx.request({
-      url: app.globalData.https + '/public/mp/synchronize/synchronizeArtile',
+      url: app.globalData.https + '/mp/synchronize/synchronizeArtile',
       data: {
         page: that.data.informationPage,
         limit: that.data.pageLimit,
@@ -209,7 +209,7 @@ Page({
       },
       method: "POST",
       success: function (res) {
-        console.log(res.data);
+        // console.log(res.data);
         var data = res.data;
         that.setData({ informationList: data });
       }
@@ -223,7 +223,7 @@ Page({
       var page = that.data.informationPage + 1;
       that.setData({ informationPage: page});
       wx.request({
-        url: app.globalData.https + '/public/mp/synchronize/synchronizeArtile',
+        url: app.globalData.https + '/mp/synchronize/synchronizeArtile',
         data: {
           page: that.data.informationPage,
           limit: that.data.pageLimit,
@@ -247,7 +247,7 @@ Page({
   getViewList: function () {
     var that = this;
     wx.request({
-      url: app.globalData.https + '/public/mp/synchronize/synchronizeArtile',
+      url: app.globalData.https + '/mp/synchronize/synchronizeArtile',
       data: {
         page: that.data.viewPage,
         limit: that.data.pageLimit,
@@ -255,7 +255,7 @@ Page({
       },
       method: "POST",
       success: function (res) {
-        console.log(res.data);
+        // console.log('getViewList',res.data);
         var data = res.data;
         that.setData({ viewList: data });
       }
@@ -272,7 +272,7 @@ Page({
       console.log(that.data.viewPage);
       console.log(that.data.pageLimit);
       wx.request({
-        url: app.globalData.https + '/public/mp/synchronize/synchronizeArtile',
+        url: app.globalData.https + '/mp/synchronize/synchronizeArtile',
         data: {
           page: that.data.viewPage,
           limit: that.data.pageLimit,
@@ -296,7 +296,7 @@ Page({
   getBookList: function () {
     var that = this;
     wx.request({
-      url: app.globalData.https + '/public/mp/synchronize/synchronizeArtile',
+      url: app.globalData.https + '/mp/synchronize/synchronizeArtile',
       data: {
         page: that.data.bookPage,
         limit: that.data.pageLimit,
@@ -318,7 +318,7 @@ Page({
       var page = that.data.bookPage + 1;
       that.setData({ bookPage: page });
       wx.request({
-        url: app.globalData.https + '/public/mp/synchronize/synchronizeArtile',
+        url: app.globalData.https + '/mp/synchronize/synchronizeArtile',
         data: {
           page: that.data.bookPage,
           limit: that.data.pageLimit,
@@ -342,7 +342,7 @@ Page({
   getSolutionList: function () {
     var that = this;
     wx.request({
-      url: app.globalData.https + '/public/mp/synchronize/synchronizeArtile',
+      url: app.globalData.https + '/mp/synchronize/synchronizeArtile',
       data: {
         page: that.data.solutionPage,
         limit: that.data.pageLimit,
@@ -364,7 +364,7 @@ Page({
       var page = that.data.solutionPage + 1;
       that.setData({ solutionPage: page });
       wx.request({
-        url: app.globalData.https + '/public/mp/synchronize/synchronizeArtile',
+        url: app.globalData.https + '/mp/synchronize/synchronizeArtile',
         data: {
           page: that.data.solutionPage,
           limit: that.data.pageLimit,

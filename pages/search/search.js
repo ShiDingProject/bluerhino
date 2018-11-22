@@ -70,7 +70,7 @@ Page({
   get_SearchHotwordList: function(){
     var that = this;
     wx.request({
-      url: app.globalData.https + '/public/mp/synchronize/searchHotword',
+      url: app.globalData.https + '/mp/synchronize/searchHotword',
       data: {},
       method: "POST",
       success: function (res) {
@@ -116,7 +116,7 @@ Page({
     // console.log(that.data.pageLimit);
     // console.log(that.data.search_value);
     wx.request({
-      url: app.globalData.https + '/public/mp/synchronize/synchronizeArtile',
+      url: app.globalData.https + '/mp/synchronize/synchronizeArtile',
       data: {
         page: that.data.detailPage,
         limit: that.data.pageLimit,
